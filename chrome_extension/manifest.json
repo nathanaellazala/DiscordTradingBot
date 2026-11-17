@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Webull Alert Reader (Local Only)",
+  "version": "6.0.0",
+  "description": "Local Discord new-message observer supporting embedded entry alerts. No Discord API or tokens.",
+  "host_permissions": [
+    "http://127.0.0.1/*"
+  ],
+  "permissions": [],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://discord.com/channels/*"
+      ],
+      "js": [
+        "matcher.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Discord Webull Reader: ON connected, ERR bridge failure"
+  }
+}
