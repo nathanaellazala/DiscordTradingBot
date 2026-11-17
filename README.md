@@ -80,8 +80,8 @@ On first run, the program generates an untracked `config.json` from built-in def
 The following tests were run locally against this uploaded v6 source during portfolio preparation:
 
 ```bash
-python3 -m unittest -q test_bot test_freshness_v4 test_bridge_v5 test_embedded_v6
-# Ran 43 tests — OK
+python3 -m unittest -q test_bot test_freshness_v4 test_bridge_v5 test_embedded_v6 test_failures
+# Ran 46 tests — OK
 
 node --test test_matcher_v6.js
 # 6 tests passed
@@ -100,3 +100,7 @@ Tests use mocks and a localhost server; they do **not** verify actual broker fil
 ## Portfolio notes
 
 This repository is published to demonstrate practical Python automation and testing. The goal is to show engineering choices, defensive checks, and the ability to explain how the system operates—not to claim investment performance or broker integration validation.
+
+## Offline failure regressions and CI
+
+`test_failures.py` checks persisted ambiguous entry state across restart, ambiguous take-profit acknowledgement/API failure, and corrupt-state refusal. All broker calls are synthetic mocks; none prove live broker reconciliation. GitHub Actions runs the Python and JavaScript suites with no trading credentials. An unresolved entry blocks further orders, and uncertain take-profit state retains its client order ID for inspection.
