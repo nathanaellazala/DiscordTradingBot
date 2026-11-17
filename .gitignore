@@ -1,0 +1,26 @@
+# Sensitive local configuration
+.env
+.env.*
+!.env.example
+config.json
+
+# Local runtime state and logs
+live_state.json
+dry_run_state.json
+bot.log
+bot.lock
+*.log
+
+# Python and editor files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.vscode/
+.idea/
+
+# Local screen captures and archives
+*.zip
+screenshots-private/
